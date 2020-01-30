@@ -56,3 +56,21 @@ class MovRotativo(models.Model):
 
     def __str__(self):
         return self.veiculo.nome + ' - ' + self.veiculo.placa
+
+
+class Mensalista(models.Model):
+    veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
+    inicio = models.DateField()
+    valor_mes = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return str(self.veiculo) + ' - ' + str(self.inicio)
+
+
+class MovMensalista(models.Model):
+    mensalista = models.ForeignKey(Mensalista, on_delete=models.CASCADE)
+    dt_pgto = models.DateField()
+    total = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return str(self.mensalista) + ' - ' + str(self.total)
